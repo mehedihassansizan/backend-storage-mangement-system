@@ -323,7 +323,13 @@ const forgetpassword = asyncHandler(async(req, res)=>{
 });
 
 const resetPassword = asyncHandler(async(req, res)=>{
-    const { email, resetToken, newPassword } = req.body;
+    const { email, resetToken, newPassword, confirmPassword} = req.body;
+
+    if (newPassword !== confirmPassword) {
+        return res.status(401).json(
+            new ApiResponse(401, "Password and confirm password do not match")
+        )
+      }
 
   try {
     const user = await User.findOne({ email });

@@ -15,12 +15,16 @@ app.use(express.static("public"));
 app.use(cookieParser());
 
 // Import routes
+import folderRouter from "./routes/folder.routes.js";
+import noteRouters from "./routes/note.routes.js";
 import userRouter from "./routes/user.routes.js";
 
 
 
 // declare routes
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/folders", folderRouter);
+app.use("/api/v1/notes", noteRouters);
 
 
 
