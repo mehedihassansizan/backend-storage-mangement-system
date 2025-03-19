@@ -7,7 +7,7 @@
     <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express js"/>
   </div>
 
-  <h3 align="center">A University Library Management System with Admin Panel</h3>
+  <h3 align="center">A storage Management System </h3>
 </div>
 ## <a name="quick-start">🤸 Quick Start</a>
 
