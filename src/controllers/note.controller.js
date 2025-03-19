@@ -1,4 +1,5 @@
 import { Note } from "../models/note.model.js";
+import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
@@ -14,9 +15,7 @@ const createNote = asyncHandler(async (req, res, next) => {
     const createdNote = await Note.findById(newNote._id)
 
     if (!createdNote) {
-        return res.status(401).json(
-            new ApiResponse(400,  "Note not found")
-        )
+        throw new ApiError(400,  "Note not found")  
     }
 
     return res.status(201).json(
@@ -29,9 +28,7 @@ const updateNote = asyncHandler(async (req, res, next) => {
     const { title, content } = req.body;
 
     if (!title && !content) {
-        return res.status(400).json(
-            new ApiResponse(400, null, "At least one of title or content is required")
-        );
+            throw new ApiError(400, "At least one of title or content is required")
     }
 
     const updateFields = {};
@@ -45,9 +42,7 @@ const updateNote = asyncHandler(async (req, res, next) => {
     );
 
     if (!updatedNote) {
-        return res.status(404).json(
-            new ApiResponse(404, null, "Note not found")
-        );
+            throw new ApiError(404, null, "Note not found")
     }
 
     return res.status(200).json(
@@ -59,9 +54,7 @@ const getNotes = asyncHandler(async (req, res) => {
     const note = await Note.find().populate("folders",  { strictPopulate: false });
 
     if (!note) {
-        return res.status(404).json(
-            new ApiResponse(404, null, "Notes not found")
-        )
+        throw new ApiError(404, null, "Notes not found")
     }
 
     return res.status(200).json(
@@ -75,9 +68,7 @@ const getSingleNotes = asyncHandler(async (req, res) => {
           .populate("folders",  { strictPopulate: false });
     
         if (!note) {
-            return res.status(404).json(
-                new ApiResponse(404, null, "note not found")
-            )
+            throw new ApiError(404, null, "note not found")
         }
     
         return res.status(201).json(

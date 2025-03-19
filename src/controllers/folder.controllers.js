@@ -1,4 +1,5 @@
 import { Folder } from "../models/folder.model.js";
+import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
@@ -11,9 +12,7 @@ const createFolder = asyncHandler(async (req, res) => {
     const createdFolder = await Folder.findById(newFolder._id)
 
     if (!createdFolder) {
-        return res.status(400).json(
-            new ApiResponse(400, null, "folder not found")
-        )
+        throw new ApiError(400, "folder not found")
     }
 
     return res.status(201).json(
@@ -26,9 +25,7 @@ const getFolders = asyncHandler(async (req, res) => {
     const folders = await Folder.find().populate("files").populate("notes"); 
 
     if (!folders) {
-        return res.status(404).json(
-            new ApiResponse(404, " folder not found")
-        )
+        throw new ApiError(404, " folder not found")
     }
 
     return res.status(201).json(
@@ -42,9 +39,7 @@ const getSingleFolder = asyncHandler(async (req, res) => {
     .populate("notes");
 
     if (!folder) {
-        return res.status(404).json(
-            new ApiResponse(404, null, "folder not found")
-        )
+        throw new ApiError(404, "folder not found")
     }
 
     return res.status(201).json(
@@ -56,9 +51,7 @@ const updateFolderName = asyncHandler(async (req, res) => {
     const {name} = req.body;
 
     if (!name) {
-        return res.status(400).json(
-            new ApiResponse(400, null, "name is required")
-        )
+        throw new ApiError(400, "name is required")
     }
 
     const updatedFolder = await Folder.findByIdAndUpdate(req.params.id, {
