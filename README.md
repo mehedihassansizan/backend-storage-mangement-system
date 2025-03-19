@@ -9,6 +9,8 @@
 
   <h3 align="center">A storage Management System </h3>
 </div>
+
+
 ## <a name="quick-start">🤸 Quick Start</a>
 
 Follow these steps to set up the project locally on your machine.
@@ -24,8 +26,8 @@ Make sure you have the following installed on your machine:
 **Cloning the Repository**
 
 ```bash
-git clone https://github.com/mehedihassansizan/storage-management-system-backend.git
-cd storage-management-system-backend
+git clone https://github.com/mehedihassansizan/backend-storage-mangement-system.git
+cd backend-storage-mangement-system
 ```
 
 **Installation**
