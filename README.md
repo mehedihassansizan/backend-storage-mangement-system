@@ -57,7 +57,7 @@ EMAIL_PASS=
 EMAIL_USER=
 ```
 
-Replace the placeholder values with your actual ImageKit, NeonDB, Upstash, and Resend credentials. You can obtain these credentials by signing up on the [MongoDB](https://www.mongodb.com/), [Cloudnary](https://console.cloudinary.com/), and [Nodemailer](https://www.nodemailer.com/).
+Replace the placeholder values with your actual Cloudinary, nodemailer, or MongoDB. You can obtain these credentials by signing up on the [MongoDB](https://www.mongodb.com/), [cloudinary](https://console.cloudinary.com/), and [Nodemailer](https://www.nodemailer.com/).
 
 **Running the Project**
 
