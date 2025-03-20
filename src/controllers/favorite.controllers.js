@@ -11,11 +11,17 @@ const toggleFavorite = asyncHandler(async (req, res, _next) => {
 
     let item;
     if (type === "folder") {
+
         item = await Folder.findById(id);
+
     } else if (type === "file") {
+
         item = await File.findById(id);
+
     } else if (type === "note") {
+
         item = await Note.findById(id);
+
     } else {
         throw new ApiError(400, "Invalid type. Must be 'folder', 'file', or 'note'.");
     }

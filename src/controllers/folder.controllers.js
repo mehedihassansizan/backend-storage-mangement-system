@@ -8,7 +8,6 @@ const createFolder = asyncHandler(async (req, res) => {
 
     const newFolder = await Folder.create({name, parentId});
     
-
     const createdFolder = await Folder.findById(newFolder._id)
 
     if (!createdFolder) {

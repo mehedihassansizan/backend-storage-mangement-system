@@ -36,14 +36,12 @@ export const uploadFileToCloudinary = (req, res, next) => {
 
         await fileMetadata.save();  
 
-        // Attach the metadata to the request object for further use
         req.fileMetadata = fileMetadata;
 
         next();  
       }
     );
 
-    // Pipe the file buffer to Cloudinary's upload stream
     stream.end(req.file.buffer);
   });
 };

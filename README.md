@@ -10,6 +10,46 @@
   <h3 align="center">A storage Management System </h3>
 </div>
 
+## 📋 <a name="table">Table of Contents</a>
+
+1. 🤖 [Introduction](#introduction)
+2. ⚙️ [Tech Stack](#tech-stack)
+3. 🔋 [Features](#features)
+4. 🤸 [Quick Start](#quick-start)
+5. 🔗 [Postman](#postman)
+
+## <a name="introduction">🤖 Introduction</a>
+
+The Storage Management System is a web application built with Node.js, Express.js, and MongoDB to help users efficiently manage and organize their digital files, folders, and notes. This system allows users to upload, organize, search, and delete files, folders, and notes with a clean and intuitive interface.The project follows the MVC (Model-View-Controller) design pattern for clean code structure, separating logic into models, views, and controllers.
+
+## <a name="tech-stack">⚙️ Tech Stack</a>
+
+- Backend: Node.js, Express.js
+- Database: MongoDB
+- Storage: Cloudinary for file uploads and storage
+- Authentication: JWT (JSON Web Tokens)
+- Middleware: Multer for file upload handling
+- Resend
+- API Testing: Postman for API testing
+
+## <a name="features">🔋 Features</a>
+
+### Features of the Storage Management System Backend Project
+
+👉 **User Authentication**:Secure login and registration system using JWT for authentication and session management.
+
+👉 **File Management**: Users can upload, store, and manage different types of files (images, documents, PDFs, etc.) with support for Cloud storage integration via Cloudinary.
+
+👉 **Folder Management**: Organize files and notes into folders, supporting drag-and-drop functionality for easy folder structure management.
+
+👉 **Notes**: Users can create, edit, and store notes, keeping them organized alongside files and folders.
+
+👉 **Favorites**: Mark files, folders, or notes as favorites for quick access and better organization.
+
+👉 **Copy/Paste**: Users can copy and paste files, folders, and notes to different locations within the system, ensuring smooth workflow.
+
+👉 **Deletion or update**: user can delete or update file, folder name, notes(name, content)
+
 ## <a name="quick-start">🤸 Quick Start</a>
 
 Follow these steps to set up the project locally on your machine.
@@ -66,3 +106,7 @@ npm run dev
 ```
 
 Open [http://localhost:8000](http://localhost:8000) in your browser to view the project.
+
+## <a name="postman">🤸 Postman Documentation</a>
+
+[https://documenter.getpostman.com/view/38027234/2sAYkGJyjP]
