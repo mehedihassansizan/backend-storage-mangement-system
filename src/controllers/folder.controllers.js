@@ -33,20 +33,6 @@ const getFolders = asyncHandler(async (req, res) => {
     )
 });
 
-const getSingleFolder = asyncHandler(async (req, res) => {
-    const folder = await Folder.findById(req.params.id)
-    .populate("files") 
-    .populate("notes");
-
-    if (!folder) {
-        throw new ApiError(404, "folder not found")
-    }
-
-    return res.status(201).json(
-        new ApiResponse(200, folder, "folder get successfully")
-    )
-});
-
 const updateFolderName = asyncHandler(async (req, res) => {
     const {name} = req.body;
 
@@ -70,6 +56,19 @@ const deleteFolder = asyncHandler(async (req, res) => {
 
     return res.status(201).json(
         new ApiResponse(200, "Floder delete successfully")
+    )
+});
+const getSingleFolder = asyncHandler(async (req, res) => {
+    const folder = await Folder.findById(req.params.id)
+    .populate("files") 
+    .populate("notes");
+
+    if (!folder) {
+        throw new ApiError(404, "folder not found")
+    }
+
+    return res.status(201).json(
+        new ApiResponse(200, folder, "folder get successfully")
     )
 });
 
