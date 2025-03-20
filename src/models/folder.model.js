@@ -7,7 +7,7 @@ const folderSchema = new Schema({
         trim: true,
         index: true
     },
-    folders:{
+    parentFolder:{
         type: Schema.Types.ObjectId,
         ref: "Folder",
         default: null

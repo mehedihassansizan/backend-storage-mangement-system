@@ -10,7 +10,6 @@
   <h3 align="center">A storage Management System </h3>
 </div>
 
-
 ## <a name="quick-start">🤸 Quick Start</a>
 
 Follow these steps to set up the project locally on your machine.
@@ -55,6 +54,7 @@ REFRESH_TOKEN_SECRET=
 REFRESH_TOKEN_EXPIRY=
 EMAIL_PASS=
 EMAIL_USER=
+SESSION_SECRET=
 ```
 
 Replace the placeholder values with your actual Cloudinary, nodemailer, or MongoDB. You can obtain these credentials by signing up on the [MongoDB](https://www.mongodb.com/), [cloudinary](https://console.cloudinary.com/), and [Nodemailer](https://www.nodemailer.com/).
