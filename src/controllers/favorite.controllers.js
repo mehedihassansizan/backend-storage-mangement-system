@@ -32,22 +32,6 @@ const toggleFavorite = asyncHandler(async (req, res, _next) => {
 
 });
 
-const getFavorites = asyncHandler(async (_req, res, _next) => {
-    const favoriteFolders = await Folder.find({ isFavorite: true });
-    const favoriteFiles = await File.find({ isFavorite: true });
-    const favoriteNotes = await Note.find({ isFavorite: true });
-
-    if (favoriteFolders.length ===0 && favoriteFiles.length ===0 && favoriteNotes.length ===0) {
-        throw new ApiError(404, "No favorite items found");
-    }
-
-    return res.status(200).json(new ApiResponse(200, "Favorite items retrieved", {
-        favoriteFolders,
-        favoriteFiles,
-        favoriteNotes
-    }));
-});
-
 const getFavoritesByType= asyncHandler(async (req, res, _next) => {
     const { type } = req.params;
         
@@ -68,6 +52,21 @@ const getFavoritesByType= asyncHandler(async (req, res, _next) => {
         }
 
         return res.status(200).json(new ApiResponse(200, favorites, "Favorite founded"));
+});
+const getFavorites = asyncHandler(async (_req, res, _next) => {
+    const favoriteFolders = await Folder.find({ isFavorite: true });
+    const favoriteFiles = await File.find({ isFavorite: true });
+    const favoriteNotes = await Note.find({ isFavorite: true });
+
+    if (favoriteFolders.length ===0 && favoriteFiles.length ===0 && favoriteNotes.length ===0) {
+        throw new ApiError(404, "No favorite items found");
+    }
+
+    return res.status(200).json(new ApiResponse(200, "Favorite items retrieved", {
+        favoriteFolders,
+        favoriteFiles,
+        favoriteNotes
+    }));
 });
 
 
