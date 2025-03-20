@@ -15,6 +15,7 @@ app.use(express.static("public"));
 app.use(cookieParser());
 
 // Import routes
+import dataRouter from "./routes/data.routes.js";
 import favoritesRouter from "./routes/favorite.routes.js";
 import fileRouter from "./routes/file.routes.js";
 import folderRouter from "./routes/folder.routes.js";
@@ -29,6 +30,7 @@ app.use("/api/v1/folders", folderRouter);
 app.use("/api/v1/notes", noteRouters);
 app.use("/api/v1/files", fileRouter);
 app.use("/api/v1/favorites", favoritesRouter);
+app.use("/api/v1/data", dataRouter);
 
 
 
