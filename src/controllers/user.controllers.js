@@ -359,8 +359,21 @@ const resetPassword = asyncHandler(async(req, res)=>{
   }
 })
 
+const deleteAccount = asyncHandler(async (req, res, _next) => {
+    const userId = req.user._id; 
+
+    const user = await User.findById(userId);
+    if (!user) {
+        throw new ApiError(404, "User not found");
+    }
+
+    await User.findByIdAndDelete(userId);
+
+    return res.status(200).json(new ApiResponse(200, "User account deleted successfully"));
+});
+
 export {
-    changeCurrentPassword, forgetpassword, getCurrentUser, loginUser,
+    changeCurrentPassword, deleteAccount, forgetpassword, getCurrentUser, loginUser,
     logoutUser,
     refreshAccessToken,
     registerUser, resetPassword, updateAccountDetails

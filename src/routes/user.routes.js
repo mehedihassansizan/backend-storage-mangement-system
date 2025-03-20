@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
     changeCurrentPassword,
+    deleteAccount,
     forgetpassword,
     getCurrentUser,
     loginUser,
@@ -25,6 +26,7 @@ router.route("/refresh-token").post(refreshAccessToken)
 router.route("/change-password").post(verifyJWT, changeCurrentPassword)
 router.route("/current-user").post(verifyJWT, getCurrentUser)
 router.route("/update-account").patch(verifyJWT, updateAccountDetails)
+router.route("/delete-account").delete(verifyJWT, deleteAccount)
 
 
 
