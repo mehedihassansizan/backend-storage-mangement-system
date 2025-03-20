@@ -15,6 +15,28 @@ const uploadFile = asyncHandler(async (req, res, next) => {
       });
 });
 
+const getFiles = asyncHandler(async (req, res) => {
+    const files = await File.find();
+
+    if (!files || files.length === 0) {
+        throw new ApiError(404, "No files found");
+    }
+
+    return res.status(200).json(
+        new ApiResponse(200, "Files retrieved successfully", files)
+    );
+});
+
+const getSingleFile = asyncHandler(async (req, res) => {
+    const file = await File.findById(req.params.id);
+
+    if (!file) throw new ApiError(404, "File not found");
+
+    return res.status(200).json(
+        new ApiResponse(200, "File retrieved successfully", file)
+    );
+});
+
 // Function to extract public ID from Cloudinary URL
 const getPublicIdFromUrl = (url) => {
     const parts = url.split("/");
@@ -30,10 +52,8 @@ const deletefile = asyncHandler(async (req, res) => {
 
     const publicId = getPublicIdFromUrl(file.path);
 
-    // Delete the file from Cloudinary
     await cloudinary.uploader.destroy(publicId);
 
-    // Delete file from MongoDB
     await File.findByIdAndDelete(req.params.id);
 
     return res.status(200).json(
@@ -42,5 +62,5 @@ const deletefile = asyncHandler(async (req, res) => {
 
 });
 
-export { deletefile, uploadFile };
+export { deletefile, getFiles, getSingleFile, uploadFile };
 

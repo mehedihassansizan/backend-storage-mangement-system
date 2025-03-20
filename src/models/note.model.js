@@ -8,10 +8,11 @@ const noteSchema = new Schema({
     content: {
         type: String,
     },
-    folders: {
+    folders:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Folder',
-    }
+    },
+    isFavorite: { type: Boolean, default: false }
 }, { timestamps: true });
 
 export const Note = mongoose.model("Note", noteSchema);
