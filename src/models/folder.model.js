@@ -24,7 +24,9 @@ const folderSchema = new Schema({
             ref: "Note"
         }
     ],
-    isFavorite: { type: Boolean, default: false }
+    isFavorite: { type: Boolean, default: false },
+    type: { type: String, default: "folder" }
+    
 },{
     timestamps: true
 })
