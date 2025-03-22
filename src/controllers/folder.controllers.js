@@ -21,8 +21,10 @@ const createFolder = asyncHandler(async (req, res) => {
 });
 
 const getFolders = asyncHandler(async (req, res) => {
-    const folders = await Folder.find().populate("files").populate("notes"); 
-
+    const folders = await Folder.find()
+    .populate( "files") 
+    .populate("notes")
+    
     if (!folders) {
         throw new ApiError(404, " folder not found")
     }
@@ -70,6 +72,7 @@ const getSingleFolder = asyncHandler(async (req, res) => {
         new ApiResponse(200, folder, "folder get successfully")
     )
 });
+
 
 export { createFolder, deleteFolder, getFolders, getSingleFolder, updateFolderName };
 

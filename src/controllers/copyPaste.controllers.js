@@ -13,6 +13,7 @@ const getModel = (type) => {
     return null;
 };
 
+//Need to provide proper type you want to copy or specific id
 const copyItem = asyncHandler(async (req, res, _next) => { 
     const { type, id } = await req.params;
     const Model = getModel(type);
@@ -31,15 +32,16 @@ const copyItem = asyncHandler(async (req, res, _next) => {
     return res.status(200).json(new ApiResponse(200, existingItem, `${type} copied successfully`));
 });
 
+// if you want copy in a folder need to give type folder or destination id what you want! (must need to give type)
 const pasteItem = asyncHandler(async (req, res, _next) => {
     const { copiedItem } = req.session;
-
 
     if (!copiedItem) {
         throw new ApiError(400, "No item copied");
     }
 
     const { type, id } = copiedItem;
+    const {destinationId, types} = req.params;
     const Model = getModel(type);
 
     if (!Model) {
@@ -51,61 +53,68 @@ const pasteItem = asyncHandler(async (req, res, _next) => {
         throw new ApiError(404, "Item not found to paste");
     }
 
+    const newItem = new Model({
+        ...itemToPaste.toObject(),
+        _id: undefined, 
+        name: itemToPaste.name + " - Copy", 
+        createdAt: new Date(), 
+    });
 
-    const { destinationId } = req.params;
 
     let destinationFolder = null;
     if (destinationId) {
 
         destinationFolder = await Folder.findById(destinationId);
+
         if (!destinationFolder) {
             throw new ApiError(404, "Destination folder not found");
         }
 
     }
 
-    // Initialize the copied item with new name and date
-    const newItem = new Model({
-        ...itemToPaste.toObject(),
-        _id: undefined,
-        name: itemToPaste.name + " - Copy",
-        createdAt: new Date(), 
-    });
-
-    
-
     // If destination folder is provided, add the new item to the folder
     if (destinationFolder) {
         if (type === "file") {
+            if (types === "folder") {
 
-            destinationFolder.files.push(newItem);
+                await destinationFolder.updateOne({
+                    $push: { files: newItem._id }
+                })
+                await destinationFolder.save();
+    
+            }
+        }else if(type === "note"){
+            if (types === "folder") {
 
-        } else if (type === "folder") {
+                await destinationFolder.updateOne({
+                    $push: { notes: newItem._id }
+                })
+                await destinationFolder.save();
+            }
+        }else if (type === "folder") {
+            if (types === "folder") {
 
-            destinationFolder.folders.push(newItem);
-
-        } else if (type === "note") {
-            
-            destinationFolder.notes.push(newItem);
+                await destinationFolder.updateOne({
+                    $push: { childFolder: newItem._id }
+                })
+                await destinationFolder.save();
+    
+            }
         }
-
-        // Save the updated destination folder with the new item
-        await destinationFolder.save();
     } else {
         // If no destination folder is provided, we can store the file directly in the "files" collection
         if (type === "file") {
-
            await Model.create(newItem);
-
         } else if (type === "folder") {
-
             await Model.create(newItem);
-
         } else if (type === "note") {
-
             await Model.create(newItem);
+            
         }
     }
+
+    await newItem.save()
+
     return res.status(201).json(new ApiResponse(201, `${type} pasted successfully`, newItem));
 
 });

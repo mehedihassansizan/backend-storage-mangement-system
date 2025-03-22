@@ -7,11 +7,11 @@ const folderSchema = new Schema({
         trim: true,
         index: true
     },
-    parentFolder:{
+    childFolder:[{
         type: Schema.Types.ObjectId,
         ref: "Folder",
         default: null
-    },
+    }],
     files:[
         {
             type:Schema.Types.ObjectId,
@@ -24,7 +24,11 @@ const folderSchema = new Schema({
             ref: "Note"
         }
     ],
-    isFavorite: { type: Boolean, default: false }
+    isFavorite: { type: Boolean, default: false },
+    type:{
+        type: String,
+        default: "folder"
+    },
 },{
     timestamps: true
 })

@@ -1,15 +1,15 @@
+import { Folder } from "../models/folder.model.js";
 import { Note } from "../models/note.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
 const createNote = asyncHandler(async (req, res, next) => {
-    const { title, content , folderId} = req.body;
+    const { title, content} = req.body;
     
     const newNote = await Note.create({
         title,
         content,
-        folderId
     });
 
     const createdNote = await Note.findById(newNote._id)
@@ -83,7 +83,35 @@ const deleteNote = asyncHandler(async (req, res) => {
         new ApiResponse(200, null, "Note deleted successfully")
     )
 });
+const addNoteToFolder = asyncHandler(async (req, res) => {
+    const {folderId} = req.params;
+
+    const folder = await Folder.findById(folderId);
+    if (!folder) throw new ApiError(404, "Folder not found");
+
+    const { title, content} = req.body;
+    
+    const newNote = await Note.create({
+        title,
+        content,
+    });
+
+    const note = await Note.findById(newNote._id)
+  
+    
+    if (!note) {
+        throw new ApiError(404, "new note creation failed");
+    }
+
+    folder.notes.push(note._id);
+    await folder.save();
+
+    return res.status(200).json({
+      message: "File added to folder successfully",
+      folder,
+    });
+})
 
 
-export { createNote, deleteNote, getNotes, getSingleNotes, updateNote };
+export { addNoteToFolder, createNote, deleteNote, getNotes, getSingleNotes, updateNote };
 

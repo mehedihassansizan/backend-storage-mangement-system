@@ -1,4 +1,5 @@
 import { File } from "../models/file.model.js";
+import { Folder } from "../models/folder.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
@@ -62,5 +63,31 @@ const deletefile = asyncHandler(async (req, res) => {
 
 });
 
-export { deletefile, getFiles, getSingleFile, uploadFile };
+const addFileToFolder = asyncHandler(async (req, res) => {
+    const {folderId} = req.params;
+
+    const folder = await Folder.findById(folderId);
+    if (!folder) throw new ApiError(404, "Folder not found");
+
+
+    if (!req.fileMetadata) return res.status(400).json(
+        new ApiResponse(400, "No file uploaded")
+    )
+
+  
+    const newFile = {file: req.fileMetadata}
+    if (!newFile) {
+        throw new ApiError(404, "new file creation failed");
+    }
+
+    folder.files.push(newFile.file._id);
+    await folder.save();
+
+    return res.status(200).json({
+      message: "File added to folder successfully",
+      folder,
+    });
+})
+
+export { addFileToFolder, deletefile, getFiles, getSingleFile, uploadFile };
 

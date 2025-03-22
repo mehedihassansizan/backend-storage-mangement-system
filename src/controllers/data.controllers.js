@@ -6,7 +6,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
 
-const getDataByData = asyncHandler(async (req, res, _next) => {
+const getDataByDate = asyncHandler(async (req, res, _next) => {
     const { date } = req.query;
 
     if (!date) {
@@ -49,4 +49,5 @@ const getDataByData = asyncHandler(async (req, res, _next) => {
 
 });
 
-export { getDataByData };
+export { getDataByDate };
+

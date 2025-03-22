@@ -8,6 +8,10 @@ const noteSchema = new Schema({
     content: {
         type: String,
     },
+    type:{
+        type: String,
+        default: "note"
+    },
     folders:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Folder',
