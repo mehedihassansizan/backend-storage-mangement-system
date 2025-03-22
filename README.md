@@ -29,7 +29,7 @@ The Storage Management System is a web application built with Node.js, Express.j
 - Storage: Cloudinary for file uploads and storage
 - Authentication: JWT (JSON Web Tokens)
 - Middleware: Multer for file upload handling
-- Resend
+- Nodemailer
 - API Testing: Postman for API testing
 
 ## <a name="features">🔋 Features</a>
@@ -42,9 +42,9 @@ The Storage Management System is a web application built with Node.js, Express.j
 
 👉 **Folder Management**: Organize files and notes into folders, supporting drag-and-drop functionality for easy folder structure management.
 
-👉 **Notes**: Users can create, edit, and store notes, keeping them organized alongside files and folders.
-
 👉 **Favorites**: Mark files, folders, or notes as favorites for quick access and better organization.
+
+👉 **Notes**: Users can create, edit, and store notes, keeping them organized alongside files and folders.
 
 👉 **Copy/Paste**: Users can copy and paste files, folders, and notes to different locations within the system, ensuring smooth workflow.
 

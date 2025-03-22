@@ -16,7 +16,8 @@ const noteSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Folder',
     },
-    isFavorite: { type: Boolean, default: false }
+    isFavorite: { type: Boolean, default: false },
+    type: { type: String, default: "note" }
 }, { timestamps: true });
 
 export const Note = mongoose.model("Note", noteSchema);

@@ -29,6 +29,7 @@ const folderSchema = new Schema({
         type: String,
         default: "folder"
     },
+    type: { type: String, default: "folder" }
 },{
     timestamps: true
 })
