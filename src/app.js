@@ -32,6 +32,7 @@ import favoritesRouter from "./routes/favorite.routes.js";
 import fileRouter from "./routes/file.routes.js";
 import folderRouter from "./routes/folder.routes.js";
 import noteRouters from "./routes/note.routes.js";
+import size from "./routes/size.routes.js";
 import userRouter from "./routes/user.routes.js";
 
 
@@ -44,6 +45,8 @@ app.use("/api/v1/files", fileRouter);
 app.use("/api/v1/favorites", favoritesRouter);
 app.use("/api/v1/data", dataRouter);
 app.use("/api/v1/item", copyPasteRouter);
+app.use("/api/v1/sizes", size);
+
 
 
 
