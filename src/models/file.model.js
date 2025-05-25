@@ -6,6 +6,8 @@ const fileSchema = new Schema({
     type: { type: String, required: true },  
     size: { type: Number, required: true },
     isFavorite: { type: Boolean, default: false },
+    isLocked: { type: Boolean, default: false },
+    lockPassword: { type: String, default: null },
     folders: { type: Schema.Types.ObjectId, ref: "Folder" }
 },{ timestamps: true });
 

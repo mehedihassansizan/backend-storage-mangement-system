@@ -25,11 +25,9 @@ const folderSchema = new Schema({
         }
     ],
     isFavorite: { type: Boolean, default: false },
-    type:{
-        type: String,
-        default: "folder"
-    },
-    type: { type: String, default: "folder" }
+    type: { type: String, default: "folder" },
+    isLocked: { type: Boolean, default: false },
+    lockPassword: { type: String, default: null }
 },{
     timestamps: true
 })
